@@ -1,0 +1,68 @@
+spring:
+  profiles:
+    active: development
+
+---
+
+spring:
+  profiles: cloud
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      server:
+        git:
+          uri: https://github.com/vkostov/server-config
+        health:
+          repositories:
+            user:
+              label: master
+server:
+  port: 8888
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+eureka:
+  instance:
+    hostname: config-99.cloud.ziften.com
+    nonSecurePort: 80
+  client:
+      registerWithEureka: true
+      fetchRegistry: true
+      serviceUri:
+        defaultZone: http://discovery-77.cloud.ziften.com/eureka/
+
+---
+
+spring:
+  profiles: development
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/vkostov/server-config
+        health:
+          repositories:
+            user:
+              label: master
+server:
+  port: 8888
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+eureka:
+  instance:
+    hostname: configserver
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/

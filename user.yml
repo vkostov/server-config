@@ -1,0 +1,48 @@
+spring:
+  profiles:
+    active: development
+---
+spring:
+  profiles: cloud
+  datasource:
+      url: jdbc:postgresql://10.0.20.148:5432/ziften
+      username: ziften
+      password: ziften
+  jpa:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      show-sql: false
+server:
+  port: 9000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-77.cloud.ziften.com/eureka/
+  instance:
+    hostname: user-77.cloud.ziften.com
+    nonSecurePort: 80
+ribbon:
+  eureka:
+    enabled: true
+
+---
+
+spring:
+  profiles: development
+  datasource:
+      url: jdbc:postgresql://10.0.20.148:5432/ziften
+      username: ziften
+      password: ziften
+  jpa:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      show-sql: true
+server:
+  port: 9000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+  instance:
+    preferIpAddress: true
+ribbon:
+  eureka:
+    enabled: true
