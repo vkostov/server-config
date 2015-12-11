@@ -29,7 +29,7 @@ ribbon:
 spring:
   profiles: development
   datasource:
-      url: jdbc:postgresql://10.0.20.148:5432/ziften
+      url: jdbc:postgresql://${POSTGRES_PORT_5432_TCP_ADDR:localhost}:5432/ziften
       username: ziften
       password: ziften
   jpa:
